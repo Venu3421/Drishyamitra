@@ -106,17 +106,24 @@ def tag_person_in_photo(
     if not person:
         raise HTTPException(status_code=404, detail="Person not found")
 
-    faces = db.query(Face).filter(Face.photo_id == photo_id).all()
-    if not faces:
-        # No face record yet — create a placeholder so we can tag it
-        face = Face(photo_id=photo_id, person_id=person_id, encoding=[])
-        db.add(face)
-    else:
-        for face in faces:
-            face.person_id = person_id
+    try:
+        faces = db.query(Face).filter(Face.photo_id == photo_id).all()
+        if not faces:
+            # No face record yet — create a placeholder so we can tag it
+            # Ensure JSON encoding is handled safely. Empty list is valid.
+            face = Face(photo_id=photo_id, person_id=person_id, encoding=[])
+            db.add(face)
+        else:
+            for face in faces:
+                face.person_id = person_id
 
-    db.commit()
-    return {"message": f"Photo #{photo_id} tagged as '{person.name}'"}
+        db.commit()
+        return {"message": f"Photo #{photo_id} tagged as '{person.name}'"}
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Tagging failed: {str(e)}")
 
 
 @router.delete("/{person_id}")

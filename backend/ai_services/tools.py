@@ -56,12 +56,14 @@ def send_whatsapp(phone_number: str, message: str, image_path: str = None):
                 return {"status": "error", "message": f"Image file not found: {image_path}"}
 
         if abs_image:
+            # Normalize path for pywhatkit (it can be picky on Windows)
+            abs_image = abs_image.replace("\\", "/")
             print(f"[WhatsApp] Sending image {abs_image} to {phone_number}")
             pywhatkit.sendwhats_image(
                 receiver=phone_number,
                 img_path=abs_image,
                 caption=message or "",
-                wait_time=30,
+                wait_time=45,
                 tab_close=False
             )
         else:
@@ -80,8 +82,8 @@ def send_whatsapp(phone_number: str, message: str, image_path: str = None):
         pyautogui.hotkey('ctrl', 'w')
         return {"status": "success", "message": f"WhatsApp {'image' if abs_image else 'message'} sent to {phone_number}"}
 
-    except ImportError:
-        return {"status": "error", "message": "pywhatkit or pyautogui not installed."}
+    except ImportError as e:
+        return {"status": "error", "message": f"Import failed: {str(e)}. Try installing pywhatkit and pyautogui."}
     except Exception as e:
         return {"status": "error", "message": f"WhatsApp send failed: {str(e)}"}
 

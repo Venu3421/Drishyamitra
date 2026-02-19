@@ -108,11 +108,14 @@ def get_receipts(db: Session = Depends(get_db), current_user=Depends(get_current
         .all()
     )
     total = sum(r.amount or 0 for r, _ in receipts)
-    this_month = date.today().replace(day=1)
-    # Include receipts with no date (treat as current month — they were just uploaded)
+    today = date.today()
+    this_month_start = today.replace(day=1)
+    
+    # Use upload date (photo.created_at) for "This Month" spending to match user expectation of "Recent Activity"
+    # regardless of the actual date on the receipt (which might be old or parsed incorrectly)
     month_total = sum(
-        r.amount or 0 for r, _ in receipts
-        if r.date is None or r.date >= this_month
+        r.amount or 0 for r, p in receipts
+        if p.created_at.date() >= this_month_start
     )
 
     def normalize(path: str) -> str:
