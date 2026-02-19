@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LensAI - Dark Mode Settings &amp; Privacy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.symbols.outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366f1",
+                        "background-dark": "#0a0a0f",
+                        "card-dark": "#16161e",
+                        "border-dark": "#2a2a35",
+                        "accent-teal": "#2dd4bf",
+                        "accent-indigo": "#6366f1",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'Space Grotesk', sans-serif;
+                @apply bg-background-dark text-white;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .storage-gradient {
+            background: linear-gradient(90deg, #2dd4bf 0%, #6366f1 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-border-dark bg-background-dark/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="lens_blur">lens_blur</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-tight">LensAI</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+<div class="text-[#9ca3af] flex border-none bg-card-dark items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-card-dark focus:ring-0 h-full placeholder:text-[#6b7280] px-4 rounded-r-xl text-base font-normal text-white" placeholder="Search settings..."/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-[#9ca3af] hover:text-white text-sm font-medium transition-colors" href="#">Gallery</a>
+<a class="text-[#9ca3af] hover:text-white text-sm font-medium transition-colors" href="#">Albums</a>
+<a class="text-[#9ca3af] hover:text-white text-sm font-medium transition-colors" href="#">Assistant</a>
+</nav>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-all">
+<span>Upload</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar photo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzh_kYxH-Vj1d4AshOpAW4kW-i-htWD1O6KBijF4XDGQobfdiW6VXjXuQDT_nog3KC6RlDV_ddE1KxYZgARp4t0DLOuTdVpX6czvI-AebAIgxN60TQvyakb3bCZ2Q0RrUW_Tmr-oAW6sWi7CFvcLRELftIay7FOUeuBFqOwB8IbOvM5u7FiWj4GR2CMFZopefyvA8BP6wXrufPDLvELLh6mJmTvZMFzd4glQvFIAcTmO4pBnxB8q388m0BTp2YyMD8xxkfvFe6_4O2");'></div>
+</div>
+</header>
+<main class="flex-1 flex justify-center py-10 px-6 bg-background-dark">
+<div class="max-w-[1024px] w-full flex flex-col gap-8">
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-4xl font-black tracking-tight">App Settings</h1>
+<p class="text-[#9ca3af] text-lg font-normal">Manage your AI-powered photo workspace and privacy levels.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-xl h-11 px-5 bg-card-dark text-white text-sm font-bold border border-border-dark hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+<span>Docs</span>
+</button>
+<button class="flex items-center gap-2 rounded-xl h-11 px-5 bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 hover:scale-[1.02] transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="save">save</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<div class="bg-card-dark p-1 rounded-2xl border border-border-dark">
+<div class="flex gap-1 overflow-x-auto no-scrollbar">
+<a class="flex-1 flex items-center justify-center px-6 py-3 rounded-xl text-[#9ca3af] transition-all hover:text-white" href="#">
+<span class="text-sm font-bold">Profile</span>
+</a>
+<a class="flex-1 flex items-center justify-center px-6 py-3 rounded-xl text-[#9ca3af] transition-all hover:text-white" href="#">
+<span class="text-sm font-bold">Privacy</span>
+</a>
+<a class="flex-1 flex items-center justify-center px-6 py-3 rounded-xl bg-primary text-white shadow-lg" href="#">
+<span class="text-sm font-bold">Face Recognition</span>
+</a>
+<a class="flex-1 flex items-center justify-center px-6 py-3 rounded-xl text-[#9ca3af] transition-all hover:text-white" href="#">
+<span class="text-sm font-bold">Model Config</span>
+</a>
+<a class="flex-1 flex items-center justify-center px-6 py-3 rounded-xl text-[#9ca3af] transition-all hover:text-white" href="#">
+<span class="text-sm font-bold">API Access</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<section class="bg-card-dark rounded-2xl p-8 border border-border-dark">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="face">face</span>
+</div>
+<h3 class="text-xl font-bold text-white">Face Recognition Engine</h3>
+</div>
+<div class="space-y-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-white uppercase tracking-wider">AI Model Selection</label>
+<div class="relative">
+<select class="form-select w-full rounded-xl border-border-dark bg-background-dark px-4 py-3 text-base text-white focus:border-primary focus:ring-primary/20 appearance-none">
+<option selected="">RetinaFace (Highest Accuracy)</option>
+<option>FaceNet512 (Balanced Speed/Accuracy)</option>
+<option>VGG-Face (Legacy Compatibility)</option>
+<option>ArcFace (Experimental High-Res)</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#9ca3af]">
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<p class="text-sm text-[#9ca3af]">RetinaFace is recommended for large libraries with varying lighting conditions.</p>
+</div>
+<div class="flex items-center justify-between py-4 border-t border-border-dark">
+<div class="flex flex-col gap-1">
+<p class="font-bold text-white">Enable Automated Tagging</p>
+<p class="text-sm text-[#9ca3af]">Automatically group photos by recognized faces.</p>
+</div>
+<button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none bg-primary">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div class="flex items-center justify-between py-4 border-t border-border-dark">
+<div class="flex flex-col gap-1">
+<p class="font-bold text-white">Collaborative Recognition</p>
+<p class="text-sm text-[#9ca3af]">Anonymously share vectors to improve global accuracy.</p>
+</div>
+<button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none bg-border-dark">
+<span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+</div>
+</section>
+<section class="bg-card-dark rounded-2xl p-8 border border-border-dark">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<h3 class="text-xl font-bold text-white">Privacy Controls</h3>
+</div>
+<div class="space-y-6">
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4 p-4 bg-background-dark rounded-xl border border-border-dark">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="info">info</span>
+<p class="text-sm text-[#9ca3af] leading-relaxed">
+                                            By default, LensAI does not store raw biometric data. We only store encrypted mathematical vectors representing facial features.
+                                        </p>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col gap-1">
+<p class="font-bold text-white">Strip EXIF Location Data</p>
+<p class="text-sm text-[#9ca3af]">Remove GPS tags from photos during cloud synchronization.</p>
+</div>
+<button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none bg-primary">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-border-dark">
+<div class="flex flex-col gap-1">
+<p class="font-bold text-white">Hidden People Cabinet</p>
+<p class="text-sm text-[#9ca3af]">Move untagged/private faces to an encrypted folder.</p>
+</div>
+<button class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none bg-border-dark">
+<span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="flex flex-col gap-8">
+<section class="bg-card-dark rounded-2xl p-6 border border-border-dark">
+<h3 class="text-lg font-bold mb-4 text-white">Storage Usage</h3>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<p class="text-2xl font-black text-white leading-none">184.3 GB</p>
+<p class="text-sm font-medium text-[#9ca3af]">of 256 GB</p>
+</div>
+<div class="w-full h-3 bg-border-dark rounded-full overflow-hidden flex">
+<div class="h-full storage-gradient rounded-full shadow-[0_0_15px_rgba(45,212,191,0.4)]" style="width: 55%;"></div>
+<div class="h-full bg-primary/20 rounded-full" style="width: 17%;"></div>
+</div>
+<div class="space-y-3 mt-2">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-accent-teal"></div>
+<span class="text-xs font-bold text-white">120GB</span>
+<span class="text-xs text-[#9ca3af]">High-Res Photos</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-accent-indigo"></div>
+<span class="text-xs font-bold text-white">64.3GB</span>
+<span class="text-xs text-[#9ca3af]">AI Metadata &amp; Vectors</span>
+</div>
+</div>
+<button class="w-full py-3 mt-2 rounded-xl bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 border border-primary/20 transition-colors">
+                                    Upgrade Storage Plan
+                                </button>
+</div>
+</section>
+<section class="bg-primary/10 rounded-2xl p-6 border border-primary/20 shadow-xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+<h3 class="text-lg font-bold text-white">API Access</h3>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col gap-2">
+<p class="text-xs uppercase tracking-widest text-[#9ca3af] font-bold">Your API Key</p>
+<div class="flex items-center gap-2 bg-background-dark p-3 rounded-lg border border-border-dark">
+<span class="text-sm font-mono truncate text-[#9ca3af]">sk_live_51M...9A2x</span>
+<button class="ml-auto text-[#9ca3af] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+                                    Integrate LensAI recognition into your third-party apps and workflows.
+                                </p>
+<a class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline" href="#">
+                                    View Documentation
+                                    <span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</section>
+<section class="bg-card-dark rounded-2xl p-6 border border-border-dark">
+<h3 class="text-lg font-bold mb-4 text-white">AI Model Health</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+<span class="text-sm text-white font-medium">Recognition Server: Online</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+<span class="text-sm text-white font-medium">Indexing Pipeline: Active</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-border-dark"></div>
+<span class="text-sm text-[#9ca3af] font-medium">Last Sync: 12m ago</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<div class="flex justify-between items-center py-6 border-t border-border-dark">
+<p class="text-sm text-[#9ca3af]">© 2024 LensAI Technologies Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-sm font-medium text-[#9ca3af] hover:text-white" href="#">Terms of Service</a>
+<a class="text-sm font-medium text-[#9ca3af] hover:text-white" href="#">Privacy Policy</a>
+<a class="text-sm font-medium text-[#9ca3af] hover:text-white" href="#">Help Center</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

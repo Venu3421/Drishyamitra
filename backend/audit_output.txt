@@ -1,0 +1,34 @@
+
+=== Table: users ===
+  DB columns:    ['created_at', 'dob', 'email', 'full_name', 'google_id', 'id', 'password_hash', 'smtp_email', 'smtp_password']
+  Model columns: ['created_at', 'dob', 'email', 'full_name', 'google_id', 'id', 'password_hash', 'smtp_email', 'smtp_password']
+  [OK] All model columns present in DB
+
+=== Table: photos ===
+  DB columns:    ['category', 'created_at', 'filename', 'id', 'is_sensitive', 'path', 'user_id', 'vector_embedding']
+  Model columns: ['category', 'created_at', 'filename', 'id', 'is_sensitive', 'path', 'user_id', 'vector_embedding']
+  [OK] All model columns present in DB
+
+=== Table: vault ===
+  DB columns:    ['encrypted_path', 'encryption_iv', 'id', 'original_filename', 'user_id']
+  Model columns: ['encrypted_path', 'encryption_iv', 'id', 'original_filename', 'user_id']
+  [OK] All model columns present in DB
+
+=== Table: receipts ===
+  DB columns:    ['amount', 'category', 'date', 'id', 'merchant', 'photo_id', 'tax']
+  Model columns: ['amount', 'category', 'date', 'id', 'merchant', 'photo_id', 'tax']
+  [OK] All model columns present in DB
+
+=== Table: people ===
+  DB columns:    ['created_at', 'id', 'name', 'user_id']
+  Model columns: ['created_at', 'id', 'name', 'user_id']
+  [OK] All model columns present in DB
+
+=== Table: faces ===
+  DB columns:    ['embedding_ref', 'encoding', 'id', 'name', 'person_id', 'photo_id', 'user_id']
+  Model columns: ['encoding', 'id', 'person_id', 'photo_id']
+  [OK] All model columns present in DB
+  Extra in DB (not in model, OK to ignore): {'user_id', 'name', 'embedding_ref'}
+
+
+Migration complete!

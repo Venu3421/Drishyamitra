@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+httpx
+pytesseract
+pillow
+groq

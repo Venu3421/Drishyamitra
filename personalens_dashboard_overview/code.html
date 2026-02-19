@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PersonaLens Dark Mode Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4F46E5", // Indigo
+                        "secondary": "#14B8A6", // Teal
+                        "background-dark": "#05050A",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer components {
+            .glass-panel {
+                @apply bg-white/5 backdrop-blur-xl border border-white/10;
+            }
+            .sidebar-glass {
+                @apply bg-black/40 backdrop-blur-2xl border-r border-white/5;
+            }
+            .neon-glow-indigo {
+                box-shadow: 0 0 15px -3px rgba(79, 70, 229, 0.4);
+            }
+            .neon-glow-teal {
+                box-shadow: 0 0 15px -3px rgba(20, 184, 166, 0.4);
+            }
+            .main-gradient {
+                background: radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
+                            radial-gradient(circle at 100% 100%, rgba(20, 184, 166, 0.1) 0%, transparent 40%),
+                            #05050A;
+            }
+            .upload-dashed-dark {
+                background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%234F46E5FF' stroke-width='2' stroke-dasharray='12%2c 12' stroke-linecap='square'/%3e%3c/svg%3e");
+            }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-dark text-white antialiased">
+<div class="flex h-screen overflow-hidden main-gradient">
+<aside class="w-72 sidebar-glass flex flex-col h-full z-20">
+<div class="p-8 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg flex items-center justify-center neon-glow-indigo">
+<span class="material-symbols-outlined text-white text-2xl">camera_outdoor</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-white">PersonaLens</h1>
+<p class="text-[10px] uppercase tracking-widest font-semibold text-primary">AI Photo Core</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white shadow-lg neon-glow-indigo" href="#">
+<span class="material-symbols-outlined text-[22px] fill-1">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">photo_library</span>
+<span class="text-sm font-medium">Gallery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">face_6</span>
+<span class="text-sm font-medium">People</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">folder_special</span>
+<span class="text-sm font-medium">Smart Folders</span>
+</a>
+<div class="pt-6 pb-2 px-4">
+<p class="text-[11px] font-bold text-gray-600 uppercase tracking-widest">Library</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">delete</span>
+<span class="text-sm font-medium">Recently Deleted</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-6">
+<div class="glass-panel rounded-2xl p-4 border-white/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-gray-300">Storage Used</span>
+<span class="text-xs font-bold text-secondary">85%</span>
+</div>
+<div class="w-full bg-white/10 rounded-full h-1.5 mb-4">
+<div class="bg-secondary h-1.5 rounded-full neon-glow-teal" style="width: 85%"></div>
+</div>
+<button class="w-full py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-lg border border-white/10 transition-all">
+                    Upgrade Storage
+                </button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<header class="flex items-center justify-between px-10 py-6">
+<div class="flex-1 max-w-2xl">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">search_hands_free</span>
+</div>
+<input class="block w-full pl-12 pr-12 py-3 bg-white/5 border border-white/10 rounded-2xl text-sm text-white placeholder:text-gray-500 focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all outline-none" placeholder="AI Smart Search for faces, objects, or dates (Ctrl + K)" type="text"/>
+<div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+<kbd class="px-2 py-1 text-[10px] font-bold text-gray-400 bg-white/5 rounded-md border border-white/10">⌘ K</kbd>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-10">
+<button class="relative p-2 text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full border-2 border-[#05050A]"></span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-white/10">
+<div class="text-right">
+<p class="text-sm font-bold text-white">Alex Rivera</p>
+<p class="text-[10px] font-medium text-secondary uppercase tracking-tighter">Pro Plan</p>
+</div>
+<div class="h-10 w-10 rounded-xl bg-primary/20 flex items-center justify-center overflow-hidden border border-white/10">
+<img alt="Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClwuwu5o8Qz6yZMRaTQ9NynSnt4xj8m9iO8r4l6_KHzF8Oj81Xo0JlWL9hmU3gN8Am7Pw7lOox4RiIXpVJVo-IwOuRylL9M9pQZES01Lt7S-gnputvuqBOpJrsxWpiKlodl5sJ35RaTtmm25SnbEsZt9Q7kETvR76efwVVCFJOpaGfB86Q95sccC7SFNvS3FnE3mVdlQ0iFG885vxO8IvRz0HHPbVsQeTVzSozuRASpwyiPzK8sUhOfx5S2foLJTGx26kpFw3y8gXB"/>
+</div>
+</div>
+</div>
+</header>
+<div class="px-10 pb-10 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between group hover:border-primary/50 transition-all neon-glow-indigo">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">image</span>
+<span class="text-[11px] font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+12%</span>
+</div>
+<p class="text-sm font-medium text-gray-400">Total Photos</p>
+<h3 class="text-3xl font-bold text-white mt-1">24,532</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-gray-500">
+<span class="material-symbols-outlined text-[14px]">sync</span> Last synced 2m ago
+                    </div>
+</div>
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between group hover:border-secondary/50 transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary bg-secondary/10 p-2 rounded-lg">face_retouching_natural</span>
+<span class="text-[11px] font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+5%</span>
+</div>
+<p class="text-sm font-medium text-gray-400">Recognized People</p>
+<h3 class="text-3xl font-bold text-white mt-1">142</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-gray-500">
+<span class="material-symbols-outlined text-[14px]">psychology</span> AI Core active
+                    </div>
+</div>
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between group hover:border-primary/50 transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-indigo-400 bg-indigo-400/10 p-2 rounded-lg">label</span>
+<span class="text-[11px] font-bold text-indigo-400 bg-indigo-400/10 px-2 py-1 rounded-full">+24%</span>
+</div>
+<p class="text-sm font-medium text-gray-400">AI Tags Generated</p>
+<h3 class="text-3xl font-bold text-white mt-1">856</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-gray-500">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Smart indexing enabled
+                    </div>
+</div>
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between group hover:border-orange-500/50 transition-all">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-orange-400 bg-orange-400/10 p-2 rounded-lg">cloud_queue</span>
+<span class="text-[11px] font-bold text-orange-400 bg-orange-400/10 px-2 py-1 rounded-full">85% Full</span>
+</div>
+<p class="text-sm font-medium text-gray-400">Cloud Storage</p>
+<h3 class="text-3xl font-bold text-white mt-1">850 GB</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-gray-500">
+<span class="material-symbols-outlined text-[14px]">report_problem</span> Optimization suggested
+                    </div>
+</div>
+</div>
+<div class="relative rounded-[2rem] p-12 upload-dashed-dark overflow-hidden flex flex-col items-center justify-center text-center group transition-all bg-white/[0.02] border border-white/5">
+<div class="absolute inset-0 bg-primary/[0.03] group-hover:bg-primary/[0.06] transition-colors"></div>
+<div class="relative space-y-6">
+<div class="mx-auto w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-2 shadow-inner border border-primary/20">
+<span class="material-symbols-outlined text-[48px]">cloud_upload</span>
+</div>
+<div class="space-y-2">
+<h2 class="text-3xl font-bold text-white tracking-tight">Drag &amp; Drop to Index</h2>
+<p class="text-gray-400 max-w-md mx-auto leading-relaxed">
+                            Upload your images here to start AI face recognition, object tagging, and automated gallery organization.
+                        </p>
+</div>
+<div class="flex items-center justify-center gap-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-xl neon-glow-indigo flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">add</span> Select Photos
+                        </button>
+<button class="bg-white/5 border border-white/10 text-white px-8 py-3.5 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all">
+                            Connect Google Photos
+                        </button>
+</div>
+<div class="text-[11px] font-bold text-primary/60 uppercase tracking-widest pt-4">
+                        JPG, PNG, HEIC, RAW supported
+                    </div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 glass-panel rounded-3xl p-8 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-secondary">recent_actors</span>
+                            Recently Identified Faces
+                        </h3>
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">View All People</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+<div class="flex flex-col items-center gap-3 p-4 rounded-2xl border border-white/5 hover:bg-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
+<img alt="Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq0aTLj4lVYHAh5LEziDkA33hUvMEg8l8W7Sj6D6yM4Bp46Wxflp1jebLm4-L-aWHoXjDgRFwp9-AzBIrtu35sJlSCLOkbJBbFS3MF4a5uJuDAUgjNfqAbyZ4xlEy99-zbls5fv99SnoYbQmeMPfCPe_DB748NUjcU0ogGio2OQZiJhRXekdZkKLBGjD3bcH6fNVyqJ4PANpyk1Xk_DQxPqXOx2jjbCZpSbdaYLU61snqlmka6Fq1e09_G-ZGK-Brxz527QavIP47F"/>
+</div>
+<span class="text-sm font-bold text-white">Sarah M.</span>
+<span class="text-[10px] font-medium px-2 py-0.5 bg-white/5 text-gray-400 rounded-full">842 Photos</span>
+</div>
+<div class="flex flex-col items-center gap-3 p-4 rounded-2xl border border-white/5 hover:bg-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
+<img alt="Michael" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5kgWx-lHtVuePb8Xc0HfLf0O5DyrwwXAeNT4p6gjatx9dCcUX6-2qkrc1gAWgvUE-pbJMFFafzfUzJ5IO2gHi4VkPZ_qLRLa8Ws5tXonmP28CNxWSp-5WUXd2-kY4Pi4c27unlS_TLfH8lF-q9vU4dkvyBME-NCV61AZqRyKTI0l8Jbnbgp3nXufOm9kWRuGjYxUZHfOHENjx3DZq9lgLSreagMGTXx3PwUoBSRvKlrSJPVAZtdjLBRk8Soo39PMagtf6jafq99xm"/>
+</div>
+<span class="text-sm font-bold text-white">Michael K.</span>
+<span class="text-[10px] font-medium px-2 py-0.5 bg-white/5 text-gray-400 rounded-full">312 Photos</span>
+</div>
+<div class="flex flex-col items-center gap-3 p-4 rounded-2xl border border-white/5 hover:bg-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 shadow-sm ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
+<img alt="Jessica" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBag8farCuXFlsT-Shb-_f7c_9kfioLDhYRSmGT_A-1BqlVJWa4wGvkXdgKP2rPxpfeHk0qyHEaNLXi3tBk43LjLOkKCyqMgNk8U0Z7L3AXguOpIz6vrcwqgaH427jH8ZbFfyo7svM1a3VMlwFDx87hwdNpktwdF_E9BYCncBlYmZgVpEcHT-EpzaqOrE0QfYmJUHNigbyDRDlEqD1BSOha0a7e_6XfbiuUHEHN2JTdS2FqK8Zohz3X6VxhNbQD5Be6malUDT0X6MT8"/>
+</div>
+<span class="text-sm font-bold text-white">Jessica W.</span>
+<span class="text-[10px] font-medium px-2 py-0.5 bg-white/5 text-gray-400 rounded-full">1,205 Photos</span>
+</div>
+<div class="flex flex-col items-center gap-3 p-4 rounded-2xl border border-dashed border-white/20 hover:bg-white/5 transition-all cursor-pointer justify-center text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined text-[32px]">add_circle</span>
+<span class="text-xs font-bold">New Face</span>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-3xl p-8 space-y-6">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-xl font-bold flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-indigo-400">magic_button</span>
+                            AI Suggestions
+                        </h3>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-white/[0.02] rounded-2xl border border-white/5 flex gap-4 hover:border-primary/30 transition-all group">
+<div class="bg-indigo-400/10 p-3 rounded-xl flex-shrink-0">
+<span class="material-symbols-outlined text-indigo-400">folder_zip</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Merge Folders?</p>
+<p class="text-xs text-gray-400 mt-1">AI detected 2 folders from 'Trip to Paris' that are similar.</p>
+<div class="mt-3 flex gap-2">
+<button class="text-[11px] font-bold text-white bg-primary px-3 py-1.5 rounded-lg">Review</button>
+<button class="text-[11px] font-bold text-gray-400 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10">Ignore</button>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white/[0.02] rounded-2xl border border-white/5 flex gap-4 hover:border-secondary/30 transition-all">
+<div class="bg-secondary/10 p-3 rounded-xl flex-shrink-0">
+<span class="material-symbols-outlined text-secondary">auto_stories</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Create Memory Book</p>
+<p class="text-xs text-gray-400 mt-1">PersonaLens curated 45 highlights from your last weekend.</p>
+<div class="mt-3 flex gap-2">
+<button class="text-[11px] font-bold text-white bg-secondary px-3 py-1.5 rounded-lg neon-glow-teal">Preview Book</button>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white/[0.02] rounded-2xl border border-white/5 flex gap-4 opacity-50">
+<div class="bg-orange-400/10 p-3 rounded-xl flex-shrink-0">
+<span class="material-symbols-outlined text-orange-400">cleaning_services</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Clear Duplicates</p>
+<p class="text-xs text-gray-400 mt-1">12 identical photos detected in 'Work' folder.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

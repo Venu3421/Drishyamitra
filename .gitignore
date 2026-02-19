@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.venv_tf/
+venv/
+env/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+uploads/
+backend/uploads/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+
+# Database (if using SQLite)
+*.db
+*.sqlite3
+
+# Logs
+*.log

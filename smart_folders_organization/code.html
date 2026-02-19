@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Folders Organization - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f44e9",
+                        "teal-accent": "#2dd4bf",
+                        "navy-deep": "#0a0a16",
+                        "navy-card": "rgba(16, 16, 35, 0.7)",
+                        "background-dark": "#05050a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            @apply bg-background-dark text-slate-100;
+        }
+        .folder-stack {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+        }
+        .folder-layer-1 {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 3;
+            transform: translateY(0);
+        }
+        .folder-layer-2 {
+            position: absolute;
+            top: -10px; left: 4px; width: 96%; height: 100%;
+            z-index: 2;
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+        .folder-layer-3 {
+            position: absolute;
+            top: -20px; left: 8px; width: 92%; height: 100%;
+            z-index: 1;
+            opacity: 0.25;
+            transform: scale(0.96);
+        }
+        .glass-card {
+            @apply bg-navy-card backdrop-blur-md border border-white/10 shadow-2xl shadow-black/50;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="dark min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/5 px-6 py-4 bg-navy-deep/90 backdrop-blur-xl sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-teal-accent">
+<span class="material-symbols-outlined text-3xl font-bold">auto_awesome_motion</span>
+<h2 class="text-white text-xl font-bold leading-tight tracking-tight">Smart Folders</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-[320px] h-11">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-white/5 border border-white/10 overflow-hidden focus-within:ring-2 focus-within:ring-teal-accent/50 transition-all">
+<div class="text-teal-accent/60 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 h-full placeholder:text-slate-500 px-3 text-base font-medium text-white" placeholder="Search faces, dates, or receipts..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<nav class="hidden lg:flex items-center gap-6 mr-6">
+<a class="text-slate-400 hover:text-teal-accent text-sm font-semibold transition-colors uppercase tracking-wider" href="#">Library</a>
+<a class="text-slate-400 hover:text-teal-accent text-sm font-semibold transition-colors uppercase tracking-wider" href="#">Sharing</a>
+<a class="text-slate-400 hover:text-teal-accent text-sm font-semibold transition-colors uppercase tracking-wider" href="#">Albums</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 text-slate-300 hover:text-teal-accent border border-white/10 hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 text-slate-300 hover:text-teal-accent border border-white/10 hover:bg-white/10 transition-all relative">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-teal-accent rounded-full shadow-[0_0_8px_#2dd4bf]"></span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-teal-accent/30 cursor-pointer shadow-lg hover:scale-105 transition-transform" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgWNoM3EzMxglkAmmJkADfHRZ6qleh0WaAObgBsOuIIGGntRrGIQFmfcc6x8uFkbZDw88IzA3GRcdyLDU7OxylCln-Uh8GgFRkLbOw7imNJsUvprztzMScwgjJPVNJB6chpKoUFTkC5uR3Fj5__SWVR_xFGLqOyF7uq4UTTPnQa1dMLKp2RhDmkSsIoR8T-cWM3pDwDKh-DBtAcChy0VrAc2sMIVjSlGdTjFqF0z2cpqrrvLe_8aF9vV0f-wDJb5xQD8Y-XVJbfgZL");'></div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 bg-gradient-to-b from-navy-deep to-background-dark">
+<div class="layout-content-container flex flex-col max-w-[1200px] w-full px-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl md:text-5xl font-bold tracking-tight">Your Smart Folders</h1>
+<p class="text-slate-400 text-lg">AI-powered organization for your memories and documents.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 rounded-xl h-12 px-6 bg-teal-accent text-navy-deep text-sm font-bold shadow-xl shadow-teal-accent/10 hover:shadow-teal-accent/20 hover:-translate-y-0.5 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Create Manual Folder</span>
+</button>
+</div>
+</div>
+<div class="mb-10 border-b border-white/5">
+<div class="flex gap-8 overflow-x-auto no-scrollbar">
+<a class="flex items-center border-b-2 border-teal-accent text-teal-accent pb-4 font-bold" href="#">
+<span>All Categories</span>
+<span class="ml-2 px-2 py-0.5 bg-teal-accent/10 rounded-full text-xs">12</span>
+</a>
+<a class="flex items-center border-b-2 border-transparent text-slate-400 pb-4 font-bold hover:text-white transition-colors" href="#">
+<span>People</span>
+</a>
+<a class="flex items-center border-b-2 border-transparent text-slate-400 pb-4 font-bold hover:text-white transition-colors" href="#">
+<span>Documents</span>
+</a>
+<a class="flex items-center border-b-2 border-transparent text-slate-400 pb-4 font-bold hover:text-white transition-colors" href="#">
+<span>Events</span>
+</a>
+</div>
+</div>
+<div class="mb-14">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-teal-accent">auto_fix_high</span>
+<h2 class="text-white text-2xl font-bold">Automated Categories</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="group flex flex-col gap-5 cursor-pointer">
+<div class="folder-stack">
+<div class="folder-layer-3 glass-card rounded-2xl"></div>
+<div class="folder-layer-2 glass-card rounded-2xl"></div>
+<div class="folder-layer-1 bg-center bg-no-repeat bg-cover rounded-2xl border border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-2xl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADCVoIZTlQKfEOiYVETDOIUk0u2VuRdfOZgUhUJFPCTJuVe31XeJhtM-5MCB_5ang5u1GS_D_yXgvZCku60ZAKEXKDJG9oW1JkwD71zyTDI7Wg4GLMrxwbAZgiqF91GOvSQITm3zrroPdBjVqEetHhNNE4vidKE015oldRk-Yjnv9O_NmBrcuRGe8iZSLpmXz_yTQB6aqNYccPHcm9PFI0MsvVGAJ0wBj4_rsJX7-EC8cVWGrLh6RBPTfeSNy9jdzI49GomY6u-IuK");'>
+<div class="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-transparent flex items-end p-4">
+<div class="flex -space-x-3">
+<div class="size-8 rounded-full border-2 border-navy-deep bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtF9-JWSIaWuIWiquyyGM67-Hi6AvEipWl-6myuVJcAbdIE9XufYBVgQS1WECC4vXzjPv8-mRi0kdp2DgzR2fKIjK_wEXUdUFoS-ZaijCZvryVNswY91qhJWkJbivZhH4rPDtb-K1kHmsXLyEwtN9MFcUDf7IRqPFLaBRW3GdHReXiCiQu2berHCy5NvaNrZGTx2IkAQPKDpx_O0OO8ZB0-iKZ1bbCb6J1cSV2CmI6wFkiwagQUXWGxBW03sGFRfnPjJp0vOQzpqmW')"></div>
+<div class="size-8 rounded-full border-2 border-navy-deep bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA21o1-MKuRcPNCdQI9VXoXu66FwrBQ250s2EQO1HAyKC44qw3fSxNq5zhdn8-0cPzVLKkgTE7TWEvC-RNI8SrW6zKSQXf_jrykvRz1naQcEZ3AKRJ97keM_PlDK2-ooWOClaX_fUSc1pQWsLQ2_mlikUFY9NP8ev3o8LYGTcfben7R39f98fxsQ_ebhhIPpN1DJWaCRuIUyB2RgPha1VSpiwKbApJ4npGRBNd2BEguaY2E8XmsJ1vFahCzH1pNJBGpHbJiND69TCVt')"></div>
+<div class="size-8 rounded-full border-2 border-navy-deep bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_UDmFW6amvWclTjGFOvXg7skFfEndEPuiJn7zs41q3G8wg9I0T-r_sQaW5K3LXcRE9ht3ihSNVAe0YEokWcBEH0w3p2eX-43B0oEWi7Y1Icky1zbWknldD8_eWsuEGYhqHzCo9Z1abHMEAocd4_8fjg3GW4Wlg6613KuIc4qc8KuOh5GBzslR2k3ItbXQk6-3a7mcB27JWoc1Qr7VXf7iRyRiJmnGrch-cE0fcu22oMg3HGt7xvNwrqZbnYrsK26_5ziW1IGI7EQE')"></div>
+<div class="size-8 rounded-full border-2 border-navy-deep bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-300">+12</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-1">
+<div class="flex justify-between items-center">
+<h3 class="text-teal-accent text-lg font-bold group-hover:text-white transition-colors">By Person</h3>
+<span class="text-xs font-bold text-teal-accent px-2 py-0.5 bg-teal-accent/10 border border-teal-accent/20 rounded-full">1,240</span>
+</div>
+<p class="text-slate-500 text-sm mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Updated 2 mins ago
+                                </p>
+</div>
+</div>
+<div class="group flex flex-col gap-5 cursor-pointer">
+<div class="folder-stack">
+<div class="folder-layer-3 glass-card rounded-2xl"></div>
+<div class="folder-layer-2 glass-card rounded-2xl"></div>
+<div class="folder-layer-1 bg-center bg-no-repeat bg-cover rounded-2xl border border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-2xl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBb8n3ECRY3OJU0m_Ya3EQEf5X7B5xtTE3C-dA7WIhSgTEJUezvT48d8DtPVba3oDFfKBV5kBpy5agbU6fDOdP9tQkd7uXL17d_kNzB0SQmlp9lIcdUQGq3c_5AdB6c73d43fesngI2dsDpdd8SeAUxuPHz6Qb5ZoaDd932fdYd-XqlxYkEllXPP7pVTrPpVhI5mFfPA29Dp1OwF8FtejjqaMAHD1D7xOAYdecsXz6pLvIie1wQsrDKOiHCbdCkje3rNTQMeKd2hHgK");'>
+<div class="absolute top-4 left-4 size-12 bg-navy-deep/60 backdrop-blur rounded-lg flex flex-col items-center justify-center border border-white/10 shadow-lg">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Oct</span>
+<span class="text-lg font-black text-teal-accent leading-none">24</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<div class="flex justify-between items-center">
+<h3 class="text-teal-accent text-lg font-bold group-hover:text-white transition-colors">By Date</h3>
+<span class="text-xs font-bold text-teal-accent px-2 py-0.5 bg-teal-accent/10 border border-teal-accent/20 rounded-full">4,560</span>
+</div>
+<p class="text-slate-500 text-sm mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Updated 1 hour ago
+                                </p>
+</div>
+</div>
+<div class="group flex flex-col gap-5 cursor-pointer">
+<div class="folder-stack">
+<div class="folder-layer-3 glass-card rounded-2xl"></div>
+<div class="folder-layer-2 glass-card rounded-2xl"></div>
+<div class="folder-layer-1 bg-center bg-no-repeat bg-cover rounded-2xl border border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-2xl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCcv2lwsGNm6PQqV-SUuSptmPf2RExFY0bTiuObZ_eaTXsvzMFbWkPCfi4MBKiM1gSvButCpg_yV7VZNjtoCeG9RfVRYNWNoRwXIX1s28z3J5fh1k3_USyM4f4PhRm96067lAbCqajBb3kBZ3XjOGtZKd-LTX0v4w5okJ32kpslCRK7_L2jLQ03ENwFDJs0VG-UQYNLXaE4yI_D7wzKys8NEiKvkaIYOLF6WViCMY6W1UOPFnYe6KbHMlKYgpdrXl8lkmq1eKgpiTWj");'>
+<div class="absolute inset-0 bg-navy-deep/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-teal-accent text-5xl">receipt_long</span>
+</div>
+</div>
+</div>
+<div class="px-1">
+<div class="flex justify-between items-center">
+<h3 class="text-teal-accent text-lg font-bold group-hover:text-white transition-colors">By Receipt</h3>
+<span class="text-xs font-bold text-teal-accent px-2 py-0.5 bg-teal-accent/10 border border-teal-accent/20 rounded-full">128</span>
+</div>
+<p class="text-slate-500 text-sm mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Updated 1 day ago
+                                </p>
+</div>
+</div>
+<div class="group flex flex-col gap-5 cursor-pointer">
+<div class="folder-stack">
+<div class="folder-layer-3 glass-card rounded-2xl"></div>
+<div class="folder-layer-2 glass-card rounded-2xl"></div>
+<div class="folder-layer-1 bg-center bg-no-repeat bg-cover rounded-2xl border border-white/20 group-hover:scale-[1.02] group-hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-2xl" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZLIPRV7_DbgA7zi7y_35qot5Ylm1APnpL5Oe6t8RZQ8cDePTgH6XAt3gHohH1eAoAu0EIOb4pTiV_QncSoXrEIo8sKZN7f4RF7I6ghUALDe5i0vPgHaHmHW8EUIb9N0h_fnx3bKBcBgUbegg90FtuhmjRJkd8aF2kFuJgNN9vtHMt_JGksUG2Wu-vtb8V9OfROODSayhl2oZXp-Pf7MFbz7r1iah1JQUyWaQ9WAvEqFMzkVA9zUV69MwxirG8Btep2JeOxk6LmPm4");'>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-navy-deep/40 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-xl">
+<span class="material-symbols-outlined text-teal-accent text-4xl">screenshot</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-1">
+<div class="flex justify-between items-center">
+<h3 class="text-teal-accent text-lg font-bold group-hover:text-white transition-colors">By Screenshot</h3>
+<span class="text-xs font-bold text-teal-accent px-2 py-0.5 bg-teal-accent/10 border border-teal-accent/20 rounded-full">842</span>
+</div>
+<p class="text-slate-500 text-sm mt-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Updated 3 hours ago
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+<div class="md:col-span-2 p-8 rounded-3xl bg-navy-card border border-white/10 shadow-2xl">
+<h3 class="text-white font-bold text-xl mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-accent">pie_chart</span>
+                            Storage Insight
+                        </h3>
+<div class="flex flex-col sm:flex-row items-center gap-10">
+<div class="relative size-40 flex-shrink-0">
+<svg class="size-full -rotate-90" viewBox="0 0 36 36">
+<path class="stroke-current text-white/5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="stroke-current text-teal-accent" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="75, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-black text-white">75%</span>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Full</span>
+</div>
+</div>
+<div class="flex flex-col gap-5 flex-1 w-full">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="size-3 bg-teal-accent rounded-full shadow-[0_0_8px_#2dd4bf]"></span>
+<span class="text-base font-medium text-slate-300">Smart Media</span>
+</div>
+<span class="text-base font-bold text-white">184.2 GB</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="size-3 bg-white/20 rounded-full"></span>
+<span class="text-base font-medium text-slate-300">Other Files</span>
+</div>
+<span class="text-base font-bold text-white">42.8 GB</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full mt-2">
+<div class="h-full bg-teal-accent rounded-full w-3/4 shadow-[0_0_8px_#2dd4bf]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-3xl bg-primary text-white flex flex-col justify-between overflow-hidden relative shadow-2xl">
+<span class="material-symbols-outlined absolute -top-4 -right-4 text-white/10 text-9xl">auto_awesome</span>
+<div>
+<h3 class="font-bold text-xl mb-2">AI Processing</h3>
+<p class="text-white/80 text-sm leading-relaxed">Identifying 1,402 new photos from your recent trip to Bali.</p>
+</div>
+<div class="mt-8">
+<div class="flex justify-between text-xs font-bold mb-3">
+<span class="uppercase tracking-widest">Syncing Library...</span>
+<span>82%</span>
+</div>
+<div class="h-2 w-full bg-white/20 rounded-full">
+<div class="h-full bg-white rounded-full w-[82%] shadow-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-10 right-10 flex flex-col items-end gap-4 z-50">
+<div class="bg-navy-card backdrop-blur-xl shadow-2xl rounded-2xl p-5 border border-white/10 max-w-[300px] hidden md:block">
+<p class="text-sm font-medium text-slate-300">
+<span class="font-bold text-teal-accent">Pro Tip:</span> Try searching for <span class="italic text-white">"receipts from last July"</span> to see our OCR in action!
+                </p>
+</div>
+<button class="size-16 rounded-full bg-teal-accent text-navy-deep shadow-2xl shadow-teal-accent/20 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl font-bold">psychology</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

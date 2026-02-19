@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensitive Vault &amp; AI Redaction - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6366f1",
+                        "background-dark": "#0a0a14",
+                        "deep-navy": "#0f1122",
+                        "vault-card": "#161b33",
+                        "security-green": "#22c55e",
+                        "neon-green": "#4ade80",
+                        "safe-teal": "#2dd4bf",
+                        "security-indigo": "#312e81",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            @apply bg-background-dark text-slate-100;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .redaction-overlay {
+            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .teal-glow {
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
+        }
+        .neon-border {
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/5 px-6 py-4 bg-deep-navy/90 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-tight">Sensitive Vault AI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Redaction Hub</a>
+<a class="text-slate-400 hover:text-white transition-colors text-sm font-medium" href="#">Secure Storage</a>
+<a class="text-slate-400 hover:text-white transition-colors text-sm font-medium" href="#">Access Logs</a>
+<a class="text-slate-400 hover:text-white transition-colors text-sm font-medium" href="#">Privacy Audit</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green rounded-full border border-neon-green/30">
+<span class="size-2 rounded-full bg-neon-green animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-wider">Vault Online</span>
+</div>
+<button class="p-2 hover:bg-white/5 rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-slate-300">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-1.5 bg-red-500 rounded-full"></span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center border-2 border-primary/30 cursor-pointer overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7e4izhhKWZCCpRR79RmjE5cXwDKeQJ6Gy_CgywP6nwjs74Zj20yG2FGTgcbkTTncCgYy8hjeC4bzvsj7aaYIaFa3dGdU8MQ2iXyze2Cb7KDMH0zuvQjgyMJceHYEy1osc3CMVhsjbBjylf4vFV3YpaJfgRkjlqFDKa-hHDko_sXTM29nComzGJk5XMMrAcwL582e0WsHJkyzMWkKqhP5dHlYmIWlT_nhkwIcjESIegmxPgGwaTcgfkwSNKLksSPKeC7CAEtHTl7Kt"/>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center gap-2 text-slate-500 text-sm mb-2">
+<span class="hover:text-primary cursor-pointer">Vault</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="hover:text-primary cursor-pointer">Documents</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">Processing Redaction</span>
+</nav>
+<h1 class="text-4xl font-bold text-white tracking-tight">AI Identity Masking</h1>
+<p class="text-slate-400 mt-2 flex items-center gap-2">
+                        Reviewing: <span class="font-mono text-xs bg-white/5 text-slate-300 border border-white/10 px-2 py-1 rounded">US-PASSPORT-092.JPG</span>
+</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-300 font-semibold text-sm hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-lg">undo</span> Revert All
+                    </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-sm shadow-xl shadow-primary/20 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-lg">check_circle</span> Approve Redaction
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-400">raw_on</span>
+<h3 class="font-bold text-slate-200">Original Source</h3>
+</div>
+<span class="text-[10px] font-bold text-slate-500 tracking-widest bg-white/5 px-2 py-1 rounded">UNSECURED DATA</span>
+</div>
+<div class="relative bg-black rounded-xl overflow-hidden aspect-[4/3] border border-white/10 group">
+<img class="w-full h-full object-cover opacity-80" data-alt="High quality close up of a mock identity document" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2NyCoxxqpaEs5Xb5p_l7qTNJKMHzqHI80RIbJ7qBCxWJ82GEzgekMGZUZT5-p2z5qzCrvgVKy70coB3YPoRkymLEKYgNI3ueI1H1GYCERxXMMchRprrT8fVmio9m9S8gni1uWrQhCnUsyGd9NRdV5xd37VnM_gMSFtTp1tI6Qp5K1FzTYlOoa3qcEG93BhliqvZLw6OJlnE5NzQGtgm4acJ5mqxXkzR5lO-ZtiLna9ItWRD52hCLjqeLMIVU_XvgsAXLEymAgpinx"/>
+<div class="absolute top-[20%] left-[10%] w-[40%] h-[10%] border-2 border-red-500/50 rounded-md bg-red-500/10 flex items-center justify-end px-2 group-hover:bg-red-500/20 transition-colors">
+<span class="text-[9px] bg-red-500 text-white font-bold px-1.5 py-0.5 rounded absolute -top-3.5 right-0 shadow-lg">SSN DETECTED</span>
+</div>
+<div class="absolute top-[35%] left-[10%] w-[30%] h-[8%] border-2 border-red-500/50 rounded-md bg-red-500/10 flex items-center justify-end px-2 group-hover:bg-red-500/20 transition-colors">
+<span class="text-[9px] bg-red-500 text-white font-bold px-1.5 py-0.5 rounded absolute -top-3.5 right-0 shadow-lg">DOB DETECTED</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-safe-teal">auto_fix_high</span>
+<h3 class="font-bold text-white">AI-Protected Output</h3>
+</div>
+<span class="text-[10px] font-bold text-safe-teal tracking-widest bg-safe-teal/10 px-2 py-1 rounded">SAFE SHARE ENABLED</span>
+</div>
+<div class="relative bg-black rounded-xl overflow-hidden aspect-[4/3] border-2 border-safe-teal/40 teal-glow">
+<img class="w-full h-full object-cover" data-alt="Identity document with blurred sensitive areas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKxc9ITb1P9JQLFpq8p7Ii3XU8_0UHe4U5Bqg3p9x9E5ublai-3xKaSkvgOOnhz7L2CVlmZvk5oGFMBgVhy5BOu05-9Xa7deaOvWVYEBeyBpa5dzag7KsoOtdkspKx3MNcpalXhry0ciGNFUfD9KQAu6XsEZFNyehCXuj9FZgx85Tj2nP1MO7ejbk020M6gF8XLxYXaYo4QGSwfHKItb3Zl5ZLCYTggS89-lJYVYztDa6_m4Dfb50jQnc_irEtvaJiEjRaU4OrmE7N"/>
+<div class="absolute top-[20%] left-[10%] w-[40%] h-[10%] redaction-overlay rounded-md border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-white/40 text-xl">visibility_off</span>
+</div>
+<div class="absolute top-[35%] left-[10%] w-[30%] h-[8%] redaction-overlay rounded-md border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-white/40 text-lg">visibility_off</span>
+</div>
+<div class="absolute top-[50%] left-[55%] w-[35%] h-[35%] redaction-overlay rounded-md border border-white/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-white/40 text-3xl">face_retouching_off</span>
+</div>
+<div class="absolute bottom-4 right-4 flex items-center gap-2 bg-safe-teal text-black text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-xs">verified_user</span>
+                            AI VERIFIED
+                        </div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-1 bg-vault-card p-6 rounded-2xl border border-white/5 shadow-2xl flex flex-col gap-6">
+<h4 class="font-bold text-white flex items-center gap-2 text-lg">
+<span class="material-symbols-outlined text-primary">settings_applications</span>
+                        Masking Rules
+                    </h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">numbers</span>
+<span class="text-sm font-medium">ID Numbers</span>
+</div>
+<div class="w-10 h-6 bg-primary rounded-full relative p-1">
+<div class="w-4 h-4 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">face</span>
+<span class="text-sm font-medium">Portraits</span>
+</div>
+<div class="w-10 h-6 bg-primary rounded-full relative p-1">
+<div class="w-4 h-4 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">history_edu</span>
+<span class="text-sm font-medium">Signatures</span>
+</div>
+<div class="w-10 h-6 bg-slate-700 rounded-full relative p-1">
+<div class="w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 bg-deep-navy border border-white/5 text-white p-8 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<svg class="h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<pattern height="10" id="grid" patternUnits="userSpaceOnUse" width="10">
+<path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(99, 102, 241, 0.3)" stroke-width="0.5"></path>
+</pattern>
+<rect fill="url(#grid)" height="100" width="100"></rect>
+</svg>
+</div>
+<div class="flex-1 flex flex-col gap-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-black border border-neon-green/30 px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-neon-green text-sm font-bold">lock</span>
+<span class="text-xs font-bold text-neon-green uppercase tracking-widest">Encrypted &amp; Secured</span>
+</div>
+<span class="text-slate-500 text-xs font-mono">AES-256 BIT</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold mb-2">Auto-Secure Zip Package</h3>
+<p class="text-slate-400 text-sm max-w-md leading-relaxed">System-generated self-extracting secure container with randomized password protection for ultra-secure shared distribution.</p>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Master Access Key</label>
+<div class="flex items-center gap-3">
+<div class="bg-black border border-white/10 rounded-xl px-4 py-3 font-mono text-lg tracking-[0.2em] text-primary grow flex items-center justify-between group cursor-help">
+<span>SENS-••••-921X</span>
+<span class="material-symbols-outlined text-white/20 group-hover:text-white transition-colors">visibility</span>
+</div>
+<button class="bg-primary hover:bg-primary/80 p-4 rounded-xl flex items-center justify-center transition-all group active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 min-w-[220px] relative z-10">
+<button class="w-full bg-white text-black hover:bg-slate-100 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl">
+<span class="material-symbols-outlined">download</span>
+                            Download Bundle
+                        </button>
+<button class="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined">share</span>
+                            Safe-Share Link
+                        </button>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-white/5">
+<div class="flex items-center justify-between mb-6">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em]">Security Audit Trail</h4>
+<span class="text-xs text-primary font-mono">v4.2-STABLE</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-[11px] py-3 px-4 bg-white/[0.02] rounded-lg border border-white/5">
+<div class="flex items-center gap-4">
+<span class="text-slate-500 font-mono">14:22:01</span>
+<span class="text-neon-green font-bold">SCAN COMPLETE</span>
+<span class="text-slate-400">3 high-risk entities identified and queued for redaction</span>
+</div>
+<span class="text-slate-600 font-mono">SEC-KERNEL-01</span>
+</div>
+<div class="flex items-center justify-between text-[11px] py-3 px-4 bg-white/[0.02] rounded-lg border border-white/5">
+<div class="flex items-center gap-4">
+<span class="text-slate-500 font-mono">14:22:05</span>
+<span class="text-primary font-bold">REDACTION APPLIED</span>
+<span class="text-slate-400">Gaussian blur filter applied to primary portrait and SSN fields</span>
+</div>
+<span class="text-slate-600 font-mono">SEC-KERNEL-01</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-6 pointer-events-none z-50">
+<div class="bg-deep-navy/95 backdrop-blur-2xl rounded-2xl border border-white/10 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-between pointer-events-auto">
+<div class="flex items-center gap-4">
+<div class="size-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-white text-sm font-bold">Vault Integrity Verified</p>
+<p class="text-slate-400 text-xs">Ready for secure export • 12 fields secured</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2 text-slate-400 hover:text-white text-sm font-bold transition-colors">Discard</button>
+<button class="bg-primary hover:brightness-110 text-white px-7 py-2.5 rounded-xl text-sm font-bold shadow-2xl shadow-primary/30 flex items-center gap-2 transition-all">
+                        Finalize &amp; Store <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+</body></html>

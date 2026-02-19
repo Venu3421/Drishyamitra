@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>People &amp; Face Recognition Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#6366f1", // Indigo primary
+                "background-dark": "#0a0a0f",
+                "surface-dark": "#161624",
+                "card-glass": "rgba(30, 30, 46, 0.6)",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 30, 46, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            background: rgba(40, 40, 60, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-200 transition-colors duration-300">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-white/5 bg-surface-dark/80 backdrop-blur-md px-6 lg:px-40 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">face</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-tight">AI Photo Manager</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-white/5 border border-white/10">
+<div class="text-white/40 flex items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden border-none bg-transparent focus:ring-0 h-full placeholder:text-slate-500 px-4 pl-2 text-sm font-normal text-white" placeholder="Search people..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Photos</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">People</a>
+<a class="text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Albums</a>
+<a class="text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Places</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 border border-white/10 text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/5 border border-white/10 text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/40 shadow-sm" data-alt="User profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1RgK2qEHy3moEuG0wdqDjv-V1YE2tGL6YiVIYk51lTPrF54z2Ptftdl4TJuYECMYDLr6zanDdYQZ-GdU749X_XEhKLzJqxtOQdRWCNuZps6Y1EsRIRElG4KWExdDOX5JtrEJVOBTnMeYTuahO0F3t7BjVugPcvjlHxe-VtFERTwQ3Srt9CO58tpFTgI4hCbI6wHuJNjnDRTYlWeTgeURbXgSdYccJam1n2qUsUgzx89LTzjKz4KhutYlv2Ryq0JmfhSsR26petBhB");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1280px] mx-auto w-full px-6 lg:px-10 py-10">
+<div class="flex flex-wrap justify-between items-end gap-4 mb-10">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl font-black leading-tight tracking-tight">People &amp; Faces</h1>
+<p class="text-slate-400 text-base font-normal">Manage recognized individuals and assign names to new detections.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 bg-white/5 border border-white/10 text-white hover:bg-white/10 rounded-xl h-11 text-sm font-bold tracking-tight transition-all">
+<span class="material-symbols-outlined text-lg">sync</span>
+<span>Re-scan Library</span>
+</button>
+<button class="flex items-center gap-2 px-5 bg-primary text-white hover:bg-indigo-500 rounded-xl h-11 text-sm font-bold tracking-tight shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-lg">person_add</span>
+<span>Add Person</span>
+</button>
+</div>
+</div>
+<div class="mb-10">
+<div class="flex border-b border-white/10 gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-2 group" href="#">
+<p class="text-sm font-bold tracking-wide">Recognized (24)</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 hover:text-primary pb-3 pt-2" href="#">
+<p class="text-sm font-bold tracking-wide">Unrecognized (12)</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 hover:text-primary pb-3 pt-2" href="#">
+<p class="text-sm font-bold tracking-wide">Hidden</p>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 mb-16">
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="relative">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhtF8WTMoPgU3EjnfjgDCVvViuIuQaY15vXCxarsbOgvPFtYJiP1aLZgSVdZEHTrCsc6WDkem7tTBLhFDszkGlp-jaiGqbprV_-DgNJGn_VsPEu-2bsJD2DyeQoi559FHhDMzA3tXo6L3qeFgCE8G2kW6N0N4wylapqcOU7FJPjOIYMg469E6wHAPRCvcP8yuqTjrafU_akzi29p8oYeBInf087sZ0v8qL3i-KDt7f-wEwaxApiPI_ssAQVkO8RlSYKYyA048knZ5Q");'></div>
+<div class="absolute bottom-0 right-1 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full ring-2 ring-[#1e1e2e]">TOP</div>
+</div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Sarah Jenkins</p>
+<p class="text-slate-400 text-sm font-medium mt-1">142 photos</p>
+</div>
+</div>
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCEo8kwsRzfxKiir-_tHRamcv0YjAbl9LzKWFh_fy1TWZR-DDln3yoFG-sMrWAe_R1-VdCvr3HExnCZRlXF3BWq_H1mHUEG6OT_sltcqwyJJt1endsqjBJEjjilJjaWsvxk-WNsp1rpDPdsd9u47lbYEZycq9rR-gckpNCAdRxGGScMABLc45-vWFJ7nwiy3-kvms_HSCqchv5axGiOY50Klt_UM0aXIfnqLOsuQWMUBFuVyiBnmjw77BrfbCpzk5NBR05WEbNtLvI");'></div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Dad</p>
+<p class="text-slate-400 text-sm font-medium mt-1">85 photos</p>
+</div>
+</div>
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQWaNHMBoo3mNlzUrZMY5U4Ma6M5KlQpuiXFFIVfg2SmNwjJxZSi1jYh0Tzeh6wvj_JuJLWrR2cAyTFJIQ5ppUail9pNr5ma2hVP94sNh7DZDkv4Aox5bHpjz8oI6wLtdqejWLliWUaOB97u6GMIcWFmaAtfF1Pi-R053qfuZmnFzSl1NFiVpRSaaojc2-Lai5paVChFzQwYBVV4Z1Zf8qQjNYNMCQ2WtcE_L4Ce3juGVZs77y-uaIRUWOCZ08PJNs8T0L_ExSofpO");'></div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Michael Chen</p>
+<p class="text-slate-400 text-sm font-medium mt-1">210 photos</p>
+</div>
+</div>
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDGMKep4fOU5-zJvWAB28i2qy0Zssjnu8Bnzwgzcu9ceHp3w5mn3SYbujSZ4_farC7l-EBgYGlgoO1uH-qfOHzOnjTZFWHzIzy_UwFDWW4-VnkEJltTgiNYgmm8JfBAOTm7WAntBrNuhacVYD5ev_0_xcn-G-jdFSmdot5ljHy_NhkEZK1dfX2_e0puYunY-iHkueEd-sLtMg_ExixfQSW5uWQbKjo3tDUA1GVLnSUn-sNZACotLAH2SLvL-5TeIb_l9AGSNKcOZ23g");'></div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Emma Wilson</p>
+<p class="text-slate-400 text-sm font-medium mt-1">64 photos</p>
+</div>
+</div>
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSK7A6HPcXN0qBpKf5erci629v12HHrizZumuQtpN8WiqGGdFn30rjQ4WvgXfR4uKj8qE2_436xgTpJ1VF02Q5XQOQlzlmx40PQ4WdBYtgbb_uAyO0oTox2EePFV9KGWzfwxlov8A50Uv9RHIY2tROr-nP6nRxfk0wJB4IckHdxsFfHbysEyb1rNr4B5QXASdBanaYru1eFNVdlCDVJqONuDGNdPXe1MFhdd-MVucYT44bUluWk3GdnryTLdvNuG3UgiEe1ZKz5qQ3");'></div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Alice Smith</p>
+<p class="text-slate-400 text-sm font-medium mt-1">112 photos</p>
+</div>
+</div>
+<div class="group flex flex-col items-center gap-4 p-5 rounded-2xl glass-card transition-all cursor-pointer">
+<div class="w-28 h-28 bg-center bg-no-repeat bg-cover rounded-full border-4 border-white/5 shadow-md group-hover:border-primary/40 transition-all" data-alt="Portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvNWpbN2Q-FNRZF0pCvMydyWaG6nDtlt4T6Z3akD4xDU42CshfEQUwgrCWbfdAuDrhEDG2jPWU1dkznQxwRdEQ0mv-UWPEKlSMLB1zlnzw7t-FlceUXilL5AhI4aavmCYHFzcLGNsGrWFzeHILsF2Wtsnb-P1lqSMSMQwrRWVIpx6h_sfaur0Z527YVrh0FapmqjzGsxxoz1QwdpL-krSp7_8wbG4Rtx23BH_Jodnp56TwfZ4sKuTl2V7MRm5ZnWnG-Ykl1YTRWJVa");'></div>
+<div class="text-center">
+<p class="text-white text-base font-bold leading-tight">Robert Brown</p>
+<p class="text-slate-400 text-sm font-medium mt-1">45 photos</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-dark rounded-3xl p-8 border border-white/5">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">person_search</span>
+<h2 class="text-white text-2xl font-bold leading-tight tracking-tight">Unrecognized Faces</h2>
+</div>
+<button class="text-primary text-sm font-bold hover:text-indigo-400">Select all</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all">
+<div class="w-20 h-20 bg-center bg-no-repeat bg-cover rounded-xl flex-shrink-0 border border-white/10" data-alt="Face crop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZb05lCPCo2LBHnQb8DEA5DLeYTMZ4tYJm3D1e4NfQj6L-trEGSYdTZdWfA7OJcnHaAj5yJxD0p-RYcbmh_XZMxeBRDFbEK8dP6GkuatXvashm0A4vMyVJMylXKApqL3TTxkC5V6mYJJUXLHupQYFgGJXHa5qHAa-Y71Ng9421Z58V76aPPKV7AiRdWAxO3HRon2LIDSFD_rweZKmbdscG4ZEC2aScbAtzen95F3lbwEIX54GNt_O8JrmZ3Nm2K0_YGfLgTndcUXbs");'></div>
+<div class="flex-1 flex flex-col gap-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Detection 041</p>
+<div class="flex gap-2">
+<input class="flex-1 text-sm bg-background-dark border border-white/20 rounded-xl focus:ring-2 focus:ring-primary/50 py-2 px-3 placeholder:text-slate-600 text-white" placeholder="Assign Name" type="text"/>
+<button class="bg-primary text-white p-2 rounded-xl hover:bg-indigo-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-green-400">auto_awesome</span>
+<p class="text-[11px] text-green-400/80 font-medium">Suggested: <span class="underline cursor-pointer">James Taylor?</span></p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all">
+<div class="w-20 h-20 bg-center bg-no-repeat bg-cover rounded-xl flex-shrink-0 border border-white/10" data-alt="Face crop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXrBVR5-nhvbxV2KrZNpvADvO4N4EXg4UvwP1H3vLpu2wSFbs7bQsdIuckNWiL0m51M36Cagx_LP6A5Cah9ZoBBelaG-iiNBiEx83qGMgioRztA0Jmrjwqpt-PjkyVTBtItr9iWgZgDDO3DUC0V2KTYjvcAR7-ALO4as-2R-aR0C3sqAkIi-JDdqEoZBGoBnPOq4vpi2QBe86vUV5od80kPFTR9vwspPKcjnJYBee_qeLPLm2Djjf7MtfMMMIxQ-Z6oGKfK3WecLQ8");'></div>
+<div class="flex-1 flex flex-col gap-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Detection 042</p>
+<div class="flex gap-2">
+<input class="flex-1 text-sm bg-background-dark border border-white/20 rounded-xl focus:ring-2 focus:ring-primary/50 py-2 px-3 placeholder:text-slate-600 text-white" placeholder="Assign Name" type="text"/>
+<button class="bg-primary text-white p-2 rounded-xl hover:bg-indigo-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+</div>
+<p class="text-[11px] text-slate-500">No suggestion available</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all">
+<div class="w-20 h-20 bg-center bg-no-repeat bg-cover rounded-xl flex-shrink-0 border border-white/10" data-alt="Face crop" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAX6QoyXb2NC0izjNVXDxOX3TOmhD14d2MHmVPHT26Mj4q9ZXdMscp1XwP-Y4-S0lj35N0BF6J_zH6tJ7Ks3llHlbpL-_pUhCCUUmT72ExjNdyjcvxV92r9HA_szxpVjZWi7ABg3LFIQeLDWenMJ0GRNr7slebM9M4bhVe59JH75sxhr-z1CqTaaHxOL0gdz5w1_shu4vzkGvvivVq151dgnhsKQtAa9pPKY8YwMdP5JC-O9ackC4KARk9EQIaIeYhjs6LW5AksG-AE");'></div>
+<div class="flex-1 flex flex-col gap-2">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Detection 043</p>
+<div class="flex gap-2">
+<input class="flex-1 text-sm bg-background-dark border border-white/20 rounded-xl focus:ring-2 focus:ring-primary/50 py-2 px-3 placeholder:text-slate-600 text-white" placeholder="Assign Name" type="text"/>
+<button class="bg-primary text-white p-2 rounded-xl hover:bg-indigo-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-green-400">auto_awesome</span>
+<p class="text-[11px] text-green-400/80 font-medium">Suggested: <span class="underline cursor-pointer">Michael Chen?</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/5 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-primary transition-all">
+<span>Load more faces</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#0f0e1b] border border-white/10 text-white px-8 py-4 rounded-full flex items-center gap-8 shadow-2xl z-40 hidden">
+<p class="text-sm font-medium">3 faces selected</p>
+<div class="w-[1px] h-4 bg-white/20"></div>
+<div class="flex gap-6">
+<button class="flex items-center gap-2 text-sm font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">drive_file_rename_outline</span>
+                    Name
+                </button>
+<button class="flex items-center gap-2 text-sm font-bold hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+                    Hide
+                </button>
+<button class="flex items-center gap-2 text-sm font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">merge</span>
+                    Merge
+                </button>
+</div>
+</div>
+</div>
+
+</body></html>
